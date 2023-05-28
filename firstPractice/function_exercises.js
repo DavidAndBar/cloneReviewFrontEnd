@@ -11,7 +11,9 @@ const generalGreetingV2 = () => "Hi Simpler World!";
 console.log(generalGreetingV2());
 
 // With parameters:
-const specificGreeting = (name) => {console.log(`Hi ${name}`);};
+const specificGreeting = (name = "Defaut Name") => {console.log(`Hi ${name}`);}; 
+// we add "= Default name", so in case you don't assign any value to the args, variable it will be that value. 
+specificGreeting();
 specificGreeting("Peter");
 
 // Now an IIFE (Immediately Invoked Function Expression) arrow function:
