@@ -42,3 +42,4 @@ const consultName = () => {
 const [variableName, functionGetName] = consultName();
 console.log(`${variableName}`);
 console.log(`${functionGetName}`);
+

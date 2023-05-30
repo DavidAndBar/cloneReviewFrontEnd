@@ -2,48 +2,36 @@ console.log("Hi")
 // Change in the code.
 // Now I am going to do a simple program using .js
 
-person1={
-    firstName:"Fred",
-    lastName: "Flintstone",
-    phoneNumber: "555555",
-    birthCountry: "USA"
-};
+// Methods for arrays:
 
-person2={ 
-    firstName: "Bruce",
-    lastName: "Wayne",
-    phoneNumber: "333333",
-    birthCountry: "USA"
-};
+names = ["Peter","Ben","May","Mary","Jane"];
 
-person3={
-    firstName: "Robin",
-    lastName: "Scherbatsky",
-    phoneNumber: "6666666",
-    birthCountry: "Canada"
-};
+// We use forEach to iterate elements in one array [The forEach() method executes a provided function once for each array element]
+names.forEach((name) => {
+    console.log(`The name is: ${name}`);
+});
 
-person4={
-    firstName: "Ted",
-    lastName: "Mosby",
-    phoneNumber: "888888",
-    birthCountry: "Canada"
-};
+// We can add a value to the names array adding .push method: 
 
-person5={
-    firstName: "Rachel",
-    lastName: "Green",
-    phoneNumber: "36952148",
-    birthCountry: "USA"
-};
+names.push("Osborn")
+console.log("--------------------");
+names.forEach((name) => {
+    console.log(`The name is: ${name}`);
+});
 
-let people=[person1,person2,person3,person4,person5];
-totalPeople=people.length;
+// array.map method creates a new array populated with the results of calling a provided function on every element in the calling array.
+numbers = [0,1,2,3,4,5,23,6,11,9,32,63,0,12];
+squareNumbers = numbers.map(number=>number*number);
+console.log(`Numbers = ${numbers}`);
+console.log(`Numbers ^ 2  = ${squareNumbers}`);
+usingSlice = numbers.slice(0,3) // Returns a portion of the array, from position 0 to 3.
+console.log(usingSlice);
+numbers.splice(0,3) // Splice method update the original array with the data you provide
+console.log(`Splice: ${numbers}`);
+const numbersFiltered = numbers.filter(number => number > 5)
+console.log(`numbersFiltered: ${numbersFiltered}`);
 
-for (let index = 0; index < totalPeople; index++){
-    if (people[index].birthCountry == "USA"){
-        console.log(`The phone number of ${people[index].firstName} ${people[index].lastName} who was born in USA is: ${people[index].phoneNumber}`);
-    }
-
-
-}
+/* cheat sheet for arrays:
+    https://livecodestream.dev/post/must-know-javascript-array-methods/
+    https://dev.to/vincenius/javascript-array-functions-cheatsheet-1c15
+*/
