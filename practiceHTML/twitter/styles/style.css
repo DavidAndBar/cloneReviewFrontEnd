@@ -66,6 +66,24 @@ p {
     justify-content: center;
 }
 
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 900px;
+
+}
+
+.main-division1 {
+    background-color: #1DA1F2;
+    width: 50%;
+    height: 900px;
+}
+
+.main-division2 {
+    width: 50%;
+}
+
 .paragraphForm1 {
     padding-bottom: 11px;
 }
