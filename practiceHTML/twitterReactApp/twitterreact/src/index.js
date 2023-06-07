@@ -12,8 +12,8 @@ root.render(
   </React.StrictMode>
 );
 
-// 
-
+// Once you set a main function you don't touch this file again, in this case
+// the function that it's going to be the heart of our 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
