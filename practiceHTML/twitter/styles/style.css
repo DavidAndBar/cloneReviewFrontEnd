@@ -66,23 +66,22 @@ p {
     justify-content: center;
 }
 
-.main-container {
+.img-division {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 900px;
-
+    height: 630px;
 }
 
 .main-division1 {
     background-color: #1DA1F2;
-    width: 50%;
+    display: inline-block;
     height: 900px;
+    width: 49%;
 }
 
 .main-division2 {
-    width: 50%;
+    display: inline-block;
 }
+
 
 .paragraphForm1 {
     padding-bottom: 11px;
