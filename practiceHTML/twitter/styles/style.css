@@ -28,6 +28,18 @@ p {
     width: 100%;
 }
 
+.buttonWhite {
+        background: #FFFFFF;
+        border: solid 1pt;
+        border-radius: 5px;
+        color: #1DA1F2;
+        cursor: pointer;
+        font-size: 16px;
+        padding-bottom: 16px;
+        padding-top: 15px;
+        width: 100%;
+}
+
 .container {
     margin: 175px 0px 100px 0px;
     width: 347px;
@@ -67,21 +79,23 @@ p {
 }
 
 .img-division {
-    display: flex;
-    height: 630px;
+    display: block;
+    margin: 25% auto 25% auto;
+    width: 50%;
+
 }
 
 .main-division1 {
     background-color: #1DA1F2;
     display: inline-block;
-    height: 900px;
+    height: 100%;
     width: 49%;
 }
 
 .main-division2 {
     display: inline-block;
+    width: 50%;
 }
-
 
 .paragraphForm1 {
     padding-bottom: 11px;
