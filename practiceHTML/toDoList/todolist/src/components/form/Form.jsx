@@ -20,13 +20,16 @@ const Form = ({ item, setItem}) => {
             setInput("");
             /*setItem(item)*/
         }        
-
+        
         return <p>  <input type="text" onChange={handleChange} value={input} placeholder="Add a task"/>
                     <button type="button" onClick={handleClick}>  Add task </button>
                 </p>
     }
 
     const ItemList = () => {
+        
+        
+        
         return <>
             { item.length === 0 ?
             <>
@@ -34,7 +37,7 @@ const Form = ({ item, setItem}) => {
             </>:
             <ul>
                 {
-                    item.map( item => <li key={item.id}> {item.task} </li>)
+                    item.map( item => <><li key={item.id}> {item.task} <input type="checkbox" /></li></>)
                 }
             </ul>}</>
     
