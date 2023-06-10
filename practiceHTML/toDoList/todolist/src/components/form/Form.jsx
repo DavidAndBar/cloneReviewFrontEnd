@@ -6,7 +6,7 @@ const Form = ({ item, setItem}) => {
 
     return <>
         <AddItems item={item} setItem={setItem}/>
-        <ItemList item={item}/>
+        <ItemList item={item} setItem={setItem}/>
         </>;
 
 }
