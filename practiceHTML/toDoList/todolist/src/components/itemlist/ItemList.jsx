@@ -4,14 +4,27 @@ const ItemList = ({item, setItem}) => {
 
     const [checkedBox, setCheckedBox] = useState(false);
 
-    const isChecked = (checkbox) => { // I don't understand this very well, why is the id in this line exactly the one I want?
+    const isChecked = (checkbox) => {
         console.log(checkbox.target.checked);
         console.log(checkbox.target.value);
-        if (checkbox.target.checked === true) {
+        const indexItem = item.indexOf(item.find(o => o.id === parseInt(checkbox.target.value)));
+        console.log(indexItem);
+        if (item[indexItem].completed === true) {
+            console.log("true");
+            console.log("First: ", item);
+            item[indexItem].completed = false;
+            setItem(item)
+            console.log("Then: ", item);
             setCheckedBox(true);
         } else {
+            console.log("false");
+            console.log("First: ", item);
+            item[indexItem].completed = true;
+            setItem(item)
+            console.log("Then: ", item);
             setCheckedBox(false);
         }
+
 
         /*if(checkbox.checked) {
             console.log(checkbox.value+"True")
@@ -20,8 +33,8 @@ const ItemList = ({item, setItem}) => {
             console.log(checkbox.value+"False")
         }
         console.log("id: ",id);
-        console.log("Looking for an id", item.find(o => o.id === id)); // This is just a test, I can delete in a while
-        const checkedItem = item.find(o => o.id === id).id; // Save the entire entry
+        console.log("Looking for an id", item.find(o => o.id === id)); // This is just a test, I can delete in a while, it saves the entire Entry
+        const checkedItem = item.find(o => o.id === id).id; // Save the value of the id.
         const indexItem = item.indexOf(item.find(o => o.id === id)); // Look for the position of the entry i'm managing
         console.log("item: ", item);
         console.log("item[indexItem]: ", item[indexItem]);
