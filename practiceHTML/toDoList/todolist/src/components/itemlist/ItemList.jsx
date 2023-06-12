@@ -24,7 +24,7 @@ const ItemList = ({item, setItem}) => {
             console.log("Then: ", item);
             setCheckedBox(false);
         }
-
+        setItem(item)
 
         /*if(checkbox.checked) {
             console.log(checkbox.value+"True")
@@ -62,7 +62,7 @@ const ItemList = ({item, setItem}) => {
         <ul>
             {
                 item.map( item => <><li key={item.id}> {item.task} {item.id}
-                                    <input type="checkbox" onChange={isChecked} checked={item.completed} value={item.id}/>
+                                    <input type="checkbox" onClick={isChecked} defaultChecked={item.completed} value={item.id}/>
                                     <button type="button">Delete Task</button>
                                     </li></>)
             }
