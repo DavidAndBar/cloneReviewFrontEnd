@@ -18,6 +18,13 @@ const ItemList = ({item, setItem}) => {
         console.log(item); // this can be deleted in the future since it's only to check the checkbox it's working
     };
 
+    const deleteButton = (event) => {
+        const indexItem = item.indexOf(item.find(o => o.id === parseInt(event.target.value)));
+        const newArray = [...item];
+        newArray.splice(indexItem,1);
+        setItem(newArray);
+    }
+
     return <>
         { item.length === 0 ?
         <p>No tasks</p>:
@@ -38,7 +45,7 @@ const ItemList = ({item, setItem}) => {
                         {/* This input is type checkbox to make it have 2 options, int his case, the task is completed or not. onClick attribute activate the 
                         function isChecked once it's clicked (more info in isChecked function). Value is setted as item.id as I need to give that value to 
                         isChecked function since they can read that variable from event.target.value*/}
-                        <td key={`button${id}`}><button type="button">Delete Task</button></td>
+                        <td key={`button${id}`}><button type="button" onClick={deleteButton} value={id}>Delete Task</button></td>
                     </tr>
                 </tbody>)
             }
