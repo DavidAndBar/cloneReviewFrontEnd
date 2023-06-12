@@ -1,72 +1,43 @@
-import { useState } from "react";
+//import { useState } from "react";
+import "./style.css";
 
 const ItemList = ({item, setItem}) => {
 
-    const [checkedBox, setCheckedBox] = useState(false);
-
-    const isChecked = (checkbox) => {
-        console.log(checkbox.target.checked);
-        console.log(checkbox.target.value);
-        const indexItem = item.indexOf(item.find(o => o.id === parseInt(checkbox.target.value)));
-        console.log(indexItem);
-        if (item[indexItem].completed === true) {
-            console.log("true");
-            console.log("First: ", item);
-            item[indexItem].completed = false;
-            setItem(item)
-            console.log("Then: ", item);
-            setCheckedBox(true);
-        } else {
-            console.log("false");
-            console.log("First: ", item);
-            item[indexItem].completed = true;
-            setItem(item)
-            console.log("Then: ", item);
-            setCheckedBox(false);
-        }
-        setItem(item)
-
-        /*if(checkbox.checked) {
-            console.log(checkbox.value+"True")
-        }
-        else {
-            console.log(checkbox.value+"False")
-        }
-        console.log("id: ",id);
-        console.log("Looking for an id", item.find(o => o.id === id)); // This is just a test, I can delete in a while, it saves the entire Entry
-        const checkedItem = item.find(o => o.id === id).id; // Save the value of the id.
-        const indexItem = item.indexOf(item.find(o => o.id === id)); // Look for the position of the entry i'm managing
-        console.log("item: ", item);
-        console.log("item[indexItem]: ", item[indexItem]);
-        console.log("indexItem: ", indexItem);
-        console.log("CheckedItem: ", checkedItem);
-        console.log("item[indexItem].completed: ", item[indexItem].completed);
-        console.log("After this comes the if");
-        if (item[indexItem].completed === false) {
-            item[indexItem].completed = true;
-            setItem(item);
-        } else {
-            item[indexItem].completed = false;
-            setItem(item);
-        }
+    const isChecked = (checkbox) => { /* We take advantage of the value of the item clicked (id) to look for the complete information about the 
+                                    that entry using item.find, we know the exact location in the array through the item.idexOf function. Then, if
+                                    the completed attribute is true, once we click the button that attribute is set as false, same logic if it's false
+                                    it turns true.*/
+        const indexItem = item.indexOf(item.find(o => o.id === parseInt(checkbox.target.value))); // value is a string, so it needs to be transformed in int.
+        item[indexItem].completed = !item[indexItem].completed
         console.log(item);
-        console.log(item[indexItem]);
-        console.log(indexItem);
-        console.log("CheckedItem: ", checkedItem);
-        console.log(item[indexItem].completed);*/
     };
 
     return <>
         { item.length === 0 ?
         <p>No tasks</p>:
-        <ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task description</th>
+                    <th>Completed?</th>
+                    <th>Delete task</th>
+                </tr>
+            </thead>
             {
-                item.map( item => <><li key={item.id}> {item.task} {item.id}
-                                    <input type="checkbox" onClick={isChecked} defaultChecked={item.completed} value={item.id}/>
-                                    <button type="button">Delete Task</button>
-                                    </li></>)
+                item.map( ({ id, task, completed}) => 
+                <tbody key={id}>
+                    <tr key={`row${id}`} className="row">
+                        <td key={`task${id}`} className={`task-${ completed ? "" : "completed"}`}>{task}</td>
+                        <td key={`input${id}`}><input type="checkbox" onClick={isChecked} value={id} defaultChecked={completed}/></td>
+                        {/* This input is type checkbox to make it have 2 options, int his case, the task is completed or not. onClick attribute activate the 
+                        function isChecked once it's clicked (more info in isChecked function). Value is setted as item.id as I need to give that value to 
+                        isChecked function since they can read that variable from event.target.value*/}
+                        <td key={`button${id}`}><button type="button">Delete Task</button></td>
+                    </tr>
+                </tbody>)
             }
-        </ul>}
+            
+        </table>}
     </>
 }
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 const AddItems = ({item, setItem}) => {
     const [input, setInput] = useState(""); /* input value is set as empty*/
 
-    const handleChange = (event) => { /* event is called to the change in the element that is being called (input) */
+    const handleChange = (event) => { /* event is called to the change the element that is being called (input) */
         setInput(event.target.value);
     }
 
@@ -21,8 +21,8 @@ const AddItems = ({item, setItem}) => {
     }        
     
     return <p>  <input type="text" onChange={handleChange} value={input} placeholder="Add a task"/>
-                <button type="button" onClick={handleClick}>  Add task </button>
+                <button type="submit" onClick={handleClick}>  Add task </button>
             </p>
 }
 
-export default AddItems
+export default AddItems;

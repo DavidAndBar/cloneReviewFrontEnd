@@ -8,10 +8,16 @@ const App = () => {
 
   const [item, setItem] = useState(initItem);
   
+  const onSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return <>
           <section>
             <h2> To do list: </h2>
-            <Form item={item} setItem={setItem}/>
+            <form onSubmit={onSubmit}>
+              <Form item={item} setItem={setItem}/>
+            </form>
           </section>
         </>
   ;
