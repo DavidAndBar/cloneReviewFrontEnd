@@ -1,0 +1,14 @@
+form {
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    width: 23%;
+}
+
+div {
+    padding-bottom: 15px;
+}
+
+button {
+    display: inline-block;
+    width: 49%;
+}

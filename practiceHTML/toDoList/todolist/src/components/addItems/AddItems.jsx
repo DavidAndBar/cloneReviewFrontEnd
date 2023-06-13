@@ -20,9 +20,10 @@ const AddItems = ({item, setItem}) => {
         }
     }        
     
-    return <p>  <input type="text" onChange={handleChange} value={input} placeholder="Add a task"/>
-                <button type="submit" onClick={handleClick}>  Add task </button>
-            </p>
+    return  <p>  
+                <input type="text" onChange={handleChange} value={input} placeholder="Add a task" style={{width: "48%", display: "inline-block", marginRight:"0.5%"}}/>
+                <button type="submit" onClick={handleClick} style={{width: "48%", display: "inline-block", marginRight:"0"}}>  Add task </button>
+            </p> 
 }
 
 export default AddItems;
