@@ -1,39 +1,30 @@
 import { useState } from "react"; // We import useState from react to use it to render variables.
-import {Link, Route, BrowserRouter} from "react-router-dom";
+import { Route, BrowserRouter, Routes} from "react-router-dom";
 import Index from "./../public/index/Index";
 import Login from "./../public/login/Login";
 import SignUp from "./../public/signup/SignUp";
 import PasswordRecovery from "./../public/passwordrecovery/PasswordRecovery";
+import Home from "./../private/home/Home"
 
-
-import style from "./style.css";
 
 const Main = () =>{
 
+    const [isAuth, setIsAuth] = useState(false)
+
     return <>
             <BrowserRouter>
-                <ul>
-                    <li><Link to="/"> Index </Link> </li>
-                    <li><Link to="/login"> Login </Link> </li>
-                    <li><Link to="/signUp"> Sign Up</Link> </li>
-                    <li><Link to="/passwordRecovery"> Password recovery </Link> </li>
-                </ul>
-                <Route path="/">
-                    <Index />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/signUp">
-                    <SignUp />
-                </Route>
-                <Route path="/passwordRecovery">
-                    <PasswordRecovery />
-                </Route>
-                
+                <Routes>
+                    {
+                        isAuth ? <> <Route path="/" element={<Home />} /></>: <>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signUp" element={<SignUp />} />
+                        <Route path="/passwordRecovery" element={<PasswordRecovery />} />                        
+                        </>
+                    }
+                </Routes>
             </BrowserRouter>
         </>
-}
-;
+};
 
 export default Main;
