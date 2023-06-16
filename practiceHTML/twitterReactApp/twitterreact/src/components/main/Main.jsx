@@ -1,33 +1,37 @@
 import { useState } from "react"; // We import useState from react to use it to render variables.
-import Content from "../content/Content";
-import Footer from "../footer/Footer";
-import Header from "../header/Header";
+import {Link, Route, BrowserRouter} from "react-router-dom";
+import Index from "./../public/index/Index";
+import Login from "./../public/login/Login";
+import SignUp from "./../public/signup/SignUp";
+import PasswordRecovery from "./../public/passwordrecovery/PasswordRecovery";
+
+
 import style from "./style.css";
 
 const Main = () =>{
-    const [name, setName] = useState("David");
-    const [username, setUsername] = useState("@Davidandbar");
-    
-    const logIn = () => {
-        setName("David");
-        setUsername("@Davidandbar");
-    }
-    
-    const logOut = () => {
-        setName("");
-        setUsername("");
-    }
-
 
     return <>
-        { name === "" ? 
-        <><p><button type="button" onClick={logIn}> Log In</button></p></>
-        :
-        <>
-        <Header username = {username} name = {name} logOut = {logOut} />
-        <Content />
-        <Footer />
-        </>}
+            <BrowserRouter>
+                <ul>
+                    <li><Link to="/"> Index </Link> </li>
+                    <li><Link to="/login"> Login </Link> </li>
+                    <li><Link to="/signUp"> Sign Up</Link> </li>
+                    <li><Link to="/passwordRecovery"> Password recovery </Link> </li>
+                </ul>
+                <Route path="/">
+                    <Index />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/signUp">
+                    <SignUp />
+                </Route>
+                <Route path="/passwordRecovery">
+                    <PasswordRecovery />
+                </Route>
+                
+            </BrowserRouter>
         </>
 }
 ;
