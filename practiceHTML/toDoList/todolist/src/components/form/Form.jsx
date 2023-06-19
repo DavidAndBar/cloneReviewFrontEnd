@@ -62,7 +62,6 @@ const Form = () => {
     }
     
     const styleForm = {
-        
         form1: {
             width: numberOfLists.length === 1 ? "100%" : 
                     numberOfLists.length === 2 ? "50%" : 
@@ -74,18 +73,17 @@ const Form = () => {
                     numberOfLists.length === 2 ? "50%" : 
                     numberOfLists.length === 3 ? "33%" : 
                                                 "23%",
+            visibility: numberOfLists.length === 1 && "hidden",
         },
         form3: {
-            width: numberOfLists.length === 1 ? "0" : 
-                    numberOfLists.length === 2 ? "0" : 
+            width: numberOfLists.length <= 2 ? "0" : 
                     numberOfLists.length === 3 ? "33%" : 
                                                 "23%",
+            visibility: numberOfLists.length <=2 && "hidden",
         },
         form4: {
-            width: numberOfLists.length === 1 ? "0" : 
-                    numberOfLists.length === 2 ? "0" : 
-                    numberOfLists.length === 3 ? "0" : 
-                                                "23%",
+            width: numberOfLists.length <= 3 ? "0" : "23%",
+            visibility: numberOfLists.length <=3 && "hidden",
         },
         
     }
