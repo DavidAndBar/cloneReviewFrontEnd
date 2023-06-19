@@ -1,6 +1,26 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () =>{
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("")
+
+    const handleClick = () => {
+        setMessage("")
+        if (username !== ""&& password !== "") {
+            
+                const user = {
+                    username: username,
+                    password: password,
+                }
+                console.log(user);
+                // Here I need to add the fetch request to the api!
+            } else {
+                setMessage("Missing Data")
+            }
+    }
+
 
     return <> 
             <main className="main">
@@ -12,10 +32,11 @@ const Login = () =>{
                     <p className="subtitle">My Twitter</p>
                     <h1 className="title">Login in your account</h1>
                         <form className="form">
-                            <p className="paragraphForm1"><label className="label">Email or Username: </label><input type="text" className="input"></input></p>
-                            <p className="paragraphForm2"><label className="label">Password: </label><input type="password" className="input"></input></p>
+                            <p className="paragraphForm1"><label className="label">Email or Username: </label><input type="text" className="input" value={username} onChange={(e) => setUsername(e.target.value)} /></p>
+                            <p className="paragraphForm2"><label className="label">Password: </label><input type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)}/></p>
                             <p className="paragraphForm2"><Link to="/passwordRecovery">Forgot password?</Link></p>
-                            <p className="paragraphForm2"><button type="button" className="button">Login now</button></p>
+                            {!!message && <p>{message}</p>}
+                            <p className="paragraphForm2"><button type="button" className="button" onClick={handleClick}>Login now</button></p>
                         </form>
                     <p>Don't have an account? <Link to="/signUp">Join free today</Link></p>
                 </section>

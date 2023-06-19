@@ -18,20 +18,22 @@ const SignUp = () =>{
                     username: username,
                     email: email,
                     password: password,
+                    passwordConfirmation: passwordConfirmation,
                 }
-                const url =  "https://api-twitter-cec-2022.herokuapp.com/api/users"
-                /*fetch(url, { // This is how we make petitions to APIs, we set the API url,
-                    method: "POST", // Method used.
-                    body: JSON.stringify(user), // Data sent.
+                /*const url = "https://pokeapi.co/api/v2/pokemon/150/" //"https://api-twitter-cec-2022.herokuapp.com/api/users"
+                fetch(url, { // This is how we make petitions to APIs, we set the API url,
+                    method: "GET", // Method used.
+                    //body: JSON.stringify(user), // Data sent.
                     headers: { // Description about what is the type of the data sent.
                         "Content-Type": "application/json"
                     },
                 })
-                .then(response => response.json())
+                .then(response => response.json()) // *Investigate why. I think it's to convert response in json.
+                .then(json => console.log(json))
                 .then(setMessage("User created"))
                 .catch(setMessage(""))*/
+                //This step will be sending the information to the api to register the user 
                 console.log(user);
-                console.log(JSON.stringify(user));
                 } else {
                 setMessage("Passwords don't match");
             }} else {
