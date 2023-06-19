@@ -19,7 +19,13 @@ const Form = () => {
                                         JSON.parse(localStorage.getItem("List4")) : 
                                         []);
 
-    const [editTitle, setEditTitle] = useState(true);
+    const [editTitle, setEditTitle] = useState([{
+        editTitle1: false,
+        editTitle2: false,
+        editTitle3: false,
+        editTitle4: false,
+    }]);
+
     const [title, setTitle] = useState("Insert Title Here");
 
     const newTask = () => {
@@ -82,15 +88,30 @@ const Form = () => {
         setTitle(event.target.value)
     }
 
-    const changeEditTitle = () => {
-        setEditTitle(!editTitle);
+    const changeEditTitle = (event) => {
+        console.log("editTitle in change", editTitle);
+        const newEditTitle = [...editTitle];
+        console.log(event);
+        if (event.target.className === "input1"){
+            newEditTitle[0].editTitle1 = !newEditTitle[0].editTitle1
+            console.log("newEditTitle", newEditTitle);
+            setEditTitle(newEditTitle)
+        }
     }
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
-            setEditTitle(!editTitle)
+            const newEditTitle = [...editTitle];
+            if (e.target.className === "input1"){
+                newEditTitle[0].editTitle1 = !newEditTitle[0].editTitle1
+                console.log("newEditTitle", newEditTitle);
+                setEditTitle(newEditTitle)
+            }
+            //setEditTitle(!editTitle)
         } 
     }
+
+    console.log(editTitle);
 
     return <>
         <div>
@@ -101,9 +122,9 @@ const Form = () => {
         <div style={{display: "flex"}}>
             <form onSubmit={onSubmit} style={styleForm.form1}>
             { numberOfLists.length > 0 && 
-            <h3>{editTitle ? 
-                    <input value={title} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
-                    <p style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title ? title : "No title"}</p>}
+            <h3>{editTitle[0].editTitle1 ? 
+                    <input className="input1" value={title} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
+                    <p className="input1" style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title ? title : "No title"}</p>}
                 <Task item={item1} setItem={setItem1}/></h3>}
             </form>
             <form onSubmit={onSubmit} style={styleForm.form2}>
