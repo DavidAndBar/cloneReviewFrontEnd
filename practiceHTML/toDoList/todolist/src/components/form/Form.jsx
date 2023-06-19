@@ -1,9 +1,11 @@
 import Task from "../task/Task";
 import { useState } from "react";
-import "./style.css"
+import "./style.css";
 
 const Form = () => {
-    const [numberOfLists, setNumberOfLists] = useState([]);
+    const [numberOfLists, setNumberOfLists] = useState(!!JSON.parse(localStorage.getItem("numberOfLists")) ? 
+                                                        JSON.parse(localStorage.getItem("numberOfLists")) : 
+                                                        []);
     const [item1, setItem1] = useState(!!JSON.parse(localStorage.getItem("List1")) ? 
                                         JSON.parse(localStorage.getItem("List1")) : 
                                         []);
@@ -17,9 +19,9 @@ const Form = () => {
                                         JSON.parse(localStorage.getItem("List4")) : 
                                         []);
 
-    console.log(localStorage.getItem("List1"));
-    console.log(JSON.parse(localStorage.getItem("List1")));
-    console.log(item1);
+    const [editTitle, setEditTitle] = useState(true);
+    const [title, setTitle] = useState("Insert Title Here");
+
     const newTask = () => {
         if (numberOfLists.length < 4) {
             const newNumberOfList = [...numberOfLists];
@@ -28,49 +30,96 @@ const Form = () => {
         } else {
             alert("Too many list of tasks")
         }
-        
-    }
-
-    const deleteTask = () => {
-        console.log("Running if");
-        const newNumberOfList = [...numberOfLists];
-        newNumberOfList.pop();
-        setNumberOfLists(newNumberOfList)
     }
 
     const saveTask = () => {
+        localStorage.setItem("numberOfLists", JSON.stringify(numberOfLists,"List"))
         localStorage.setItem("List1", JSON.stringify(item1))
         localStorage.setItem("List2", JSON.stringify(item2))
         localStorage.setItem("List3", JSON.stringify(item3))
         localStorage.setItem("List4", JSON.stringify(item4))
+        console.log("Tasks saved");
+    }
+
+    const deleteTask = () => {
+        const newNumberOfList = [...numberOfLists];
+        newNumberOfList.pop();
+        setNumberOfLists(newNumberOfList);
     }
     
+    const styleForm = {
+        form1: {
+            width: numberOfLists.length === 1 ? "100%" : 
+                    numberOfLists.length === 2 ? "50%" : 
+                    numberOfLists.length === 3 ? "33%" : 
+                                                "23%",
+        },
+        form2: {
+            width: numberOfLists.length === 1 ? "0%" : 
+                    numberOfLists.length === 2 ? "50%" : 
+                    numberOfLists.length === 3 ? "33%" : 
+                                                "23%",
+        },
+        form3: {
+            width: numberOfLists.length === 1 ? "0%" : 
+                    numberOfLists.length === 2 ? "0%" : 
+                    numberOfLists.length === 3 ? "33%" : 
+                                                "23%",
+        },
+        form4: {
+            width: numberOfLists.length === 1 ? "0%" : 
+                    numberOfLists.length === 2 ? "0%" : 
+                    numberOfLists.length === 3 ? "0%" : 
+                                                "23%",
+        }
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
+    }
+
+    const changeTitle = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const changeEditTitle = () => {
+        setEditTitle(!editTitle);
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            setEditTitle(!editTitle)
+        } 
     }
 
     return <>
         <div>
             <button type="button" className="newTaskButton" onClick={newTask}> New Day of tasks </button>
-            <button type="button" className="deleteTaskButton" onClick={deleteTask}> Delete first list of tasks</button>
+            <button type="button" className="deleteTaskButton" onClick={deleteTask}> Hide last list of tasks</button>
             <button type="button" className="saveTasksButton" onClick={saveTask}> Save uncompleted tasks in local Storage</button>
         </div>
         <div style={{display: "flex"}}>
-            <form onSubmit={onSubmit} >
+            <form onSubmit={onSubmit} style={styleForm.form1}>
             { numberOfLists.length > 0 && 
-            <><Task item={item1} setItem={setItem1}/></>}
+            <h3>{editTitle ? 
+                    <input value={title} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
+                    <p style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title ? title : "No title"}</p>}
+                <Task item={item1} setItem={setItem1}/></h3>}
             </form>
-            <form onSubmit={onSubmit} >
+            <form onSubmit={onSubmit} style={styleForm.form2}>
             { numberOfLists.length > 1 && 
-            <><Task item={item2} setItem={setItem2}/></>}
+            <><h3 style={{textAlign: "center"}}> Tasks from College </h3>
+            <Task item={item2} setItem={setItem2}/></>}
             </form>
-            <form onSubmit={onSubmit} >
+            <form onSubmit={onSubmit} style={styleForm.form3}>
             { numberOfLists.length > 2 && 
-            <><Task item={item3} setItem={setItem3}/></>}
+            <><h3 style={{textAlign: "center"}}> Personal tasks </h3>
+            <Task item={item3} setItem={setItem3}/></>}
             </form>
-            <form onSubmit={onSubmit} >
+            <form onSubmit={onSubmit} style={styleForm.form4}>
             { numberOfLists.length > 3 && 
-            <><Task item={item4} setItem={setItem4}/></>}
+            <><h3 style={{textAlign: "center"}}> Other </h3>
+            <Task item={item4} setItem={setItem4}/></>}
             {/*tasks*/}
             </form>
         </div>

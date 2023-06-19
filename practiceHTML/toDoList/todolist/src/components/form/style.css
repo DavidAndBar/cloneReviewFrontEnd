@@ -1,7 +1,6 @@
 form {
     display: inline-block;
     padding: 5px 10px 5px 10px;
-    width: 23%;
 }
 
 div {
@@ -10,5 +9,10 @@ div {
 
 button {
     display: inline-block;
+    margin-right: 0.3338%;
     width: 33%;
+}
+
+table {
+    width: 100%;
 }
