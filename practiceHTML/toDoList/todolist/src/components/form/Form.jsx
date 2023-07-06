@@ -62,27 +62,23 @@ const Form = () => {
     }
     
     const styleForm = {
+        container: {
+            gridTemplateColumns: window.innerWidth < 550 ? "1fr": 
+                                numberOfLists.length === 1  ? "0.5fr" :
+                                numberOfLists.length === 2 ? "1fr 1fr" :
+                                numberOfLists.length === 3 ? "1fr 1fr 1fr" :
+                                                            "1fr 1fr 1fr 1fr"
+        },
         form1: {
-            width: numberOfLists.length === 1 ? "100%" : 
-                    numberOfLists.length === 2 ? "50%" : 
-                    numberOfLists.length === 3 ? "33%" : 
-                                                "23%",
+            visibility: numberOfLists.length === 0 && "hidden",
         },
         form2: {
-            width: numberOfLists.length === 1 ? "0" : 
-                    numberOfLists.length === 2 ? "50%" : 
-                    numberOfLists.length === 3 ? "33%" : 
-                                                "23%",
-            visibility: numberOfLists.length === 1 && "hidden",
+            visibility: numberOfLists.length <= 1 && "hidden",
         },
         form3: {
-            width: numberOfLists.length <= 2 ? "0" : 
-                    numberOfLists.length === 3 ? "33%" : 
-                                                "23%",
             visibility: numberOfLists.length <=2 && "hidden",
         },
         form4: {
-            width: numberOfLists.length <= 3 ? "0" : "23%",
             visibility: numberOfLists.length <=3 && "hidden",
         },
         
@@ -94,13 +90,13 @@ const Form = () => {
 
     const changeTitle = (event) => {
         const newTitle = [...title];
-        if (event.target.className === "input1"){
+        if (event.target.id === "input1"){
             newTitle[0].title1 = event.target.value
-        } else if (event.target.className === "input2"){
+        } else if (event.target.id === "input2"){
             newTitle[0].title2 = event.target.value
-        } else if (event.target.className === "input3"){
+        } else if (event.target.id === "input3"){
             newTitle[0].title3 = event.target.value
-        } else if (event.target.className === "input4"){
+        } else if (event.target.id === "input4"){
             newTitle[0].title4 = event.target.value
         } 
         setTitle(newTitle)
@@ -108,13 +104,13 @@ const Form = () => {
 
     const changeEditTitle = (event) => {
         const newEditTitle = [...editTitle];
-        if (event.target.className === "input1"){
+        if (event.target.id === "input1"){
             newEditTitle[0].editTitle1 = !newEditTitle[0].editTitle1
-        } else if (event.target.className === "input2"){
+        } else if (event.target.id === "input2"){
             newEditTitle[0].editTitle2 = !newEditTitle[0].editTitle2
-        } else if (event.target.className === "input3"){
+        } else if (event.target.id === "input3"){
             newEditTitle[0].editTitle3 = !newEditTitle[0].editTitle3
-        } else if (event.target.className === "input4"){
+        } else if (event.target.id === "input4"){
             newEditTitle[0].editTitle4 = !newEditTitle[0].editTitle4
         }  
         setEditTitle(newEditTitle)
@@ -123,13 +119,13 @@ const Form = () => {
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             const newEditTitle = [...editTitle];
-            if (e.target.className === "input1"){
+            if (e.target.id === "input1"){
                 newEditTitle[0].editTitle1 = !newEditTitle[0].editTitle1
-            } else if (e.target.className === "input2") {
+            } else if (e.target.id === "input2") {
                 newEditTitle[0].editTitle2 = !newEditTitle[0].editTitle2
-            } else if (e.target.className === "input3") {
+            } else if (e.target.id === "input3") {
                 newEditTitle[0].editTitle3 = !newEditTitle[0].editTitle3
-            } else if (e.target.className === "input4") {
+            } else if (e.target.id === "input4") {
                 newEditTitle[0].editTitle4 = !newEditTitle[0].editTitle4
             }
             setEditTitle(newEditTitle)
@@ -137,42 +133,38 @@ const Form = () => {
     }
 
     return <>
-        <div>
+        <div className="contButton">
             <button type="button" className="newTaskButton" onClick={newTask}> New Day of tasks </button>
             <button type="button" className="deleteTaskButton" onClick={deleteTask}> Hide last list of tasks</button>
-            <button type="button" className="saveTasksButton" onClick={saveTask}> Save uncompleted tasks in local Storage</button>
+            <button type="button" className="saveTasksButton" onClick={saveTask}> Save uncompleted tasks</button>
         </div>
-        <div style={{display: "flex"}}>
-            <form onSubmit={onSubmit} style={styleForm.form1}>
-            { numberOfLists.length > 0 && 
+        <div className="container" style={styleForm.container}>
+            <form className="formList" onSubmit={onSubmit} style={styleForm.form1}>
             <h3>{editTitle[0].editTitle1 ? 
-                    <input className="input1" value={title[0].title1} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
-                    <p className="input1" style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title[0].title1 ? title[0].title1 : "No title"}</p>}
-                <Task item={item1} setItem={setItem1}/></h3>}
+                    <input id="input1" className="input" value={title[0].title1} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
+                    <p id="input1" onDoubleClick={changeEditTitle}>{title[0].title1 ? title[0].title1 : "No title"}</p>}
+                <Task item={item1} setItem={setItem1}/></h3>
             </form>
 
-            <form onSubmit={onSubmit} style={styleForm.form2}>
-            { numberOfLists.length > 0 && 
+            <form className="formList" onSubmit={onSubmit} style={styleForm.form2}>
             <h3>{editTitle[0].editTitle2 ? 
-                    <input className="input2" value={title[0].title2} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
-                    <p className="input2" style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title[0].title2 ? title[0].title2 : "No title"}</p>}
-                <Task item={item2} setItem={setItem2}/></h3>}
+                    <input id="input2" className="input" value={title[0].title2} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
+                    <p id="input2" onDoubleClick={changeEditTitle}>{title[0].title2 ? title[0].title2 : "No title"}</p>}
+                <Task item={item2} setItem={setItem2}/></h3>
             </form>
 
-            <form onSubmit={onSubmit} style={styleForm.form3}>
-            { numberOfLists.length > 0 && 
+            <form className="formList" onSubmit={onSubmit} style={styleForm.form3}>
             <h3>{editTitle[0].editTitle3 ? 
-                    <input className="input3" value={title[0].title3} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
-                    <p className="input3" style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title[0].title3 ? title[0].title3 : "No title"}</p>}
-                <Task item={item3} setItem={setItem3}/></h3>}
+                    <input id="input3" className="input" value={title[0].title3} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
+                    <p id="input3" onDoubleClick={changeEditTitle}>{title[0].title3 ? title[0].title3 : "No title"}</p>}
+                <Task item={item3} setItem={setItem3}/></h3>
             </form>
 
-            <form onSubmit={onSubmit} style={styleForm.form4}>
-            { numberOfLists.length > 0 && 
+            <form className="formList" onSubmit={onSubmit} style={styleForm.form4}>
             <h3>{editTitle[0].editTitle4 ? 
-                    <input className="input4" value={title[0].title4} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown} style={{margin: "auto", display: "block", borderWidth: "0px"}}/> : 
-                    <p className="input4" style={{textAlign: "center"}} onDoubleClick={changeEditTitle}>{title[0].title4 ? title[0].title4 : "No title"}</p>}
-                <Task item={item4} setItem={setItem4}/></h3>}
+                    <input id="input4" className="input" value={title[0].title4} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
+                    <p id="input4" onDoubleClick={changeEditTitle}>{title[0].title4 ? title[0].title4 : "No title"}</p>}
+                <Task item={item4} setItem={setItem4}/></h3>
             </form>
             {/*tasks*/}
         </div>
