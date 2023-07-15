@@ -1,3 +1,10 @@
+#containerDelete {
+    border: 1px solid black;
+    display: flex;
+    margin-left: 5%;
+    padding: 1%;
+}
+
 button {
     display: inline-block;
     margin-right: 0.3338%;
@@ -8,10 +15,6 @@ form {
     padding: 5px 5px 5px 5px;
     max-width: 100%;
 	text-align: center;
-}
-
-div {
-    padding-bottom: 15px;
 }
 
 p {
@@ -29,14 +32,19 @@ table {
 
 .contButton {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: fit-content;
+    grid-template-columns: 50% 50%;
+    padding-bottom: 15px;
 }
 
 .input {
     margin: auto;
     display: block;
     border-width: 0px;
+}
+
+.mainButton {
+    margin: auto 5% auto 5%;
+    width: 90%;
 }
 
 h3 {

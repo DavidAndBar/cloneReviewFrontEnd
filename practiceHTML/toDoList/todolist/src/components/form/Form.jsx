@@ -38,8 +38,8 @@ const Form = () => {
     const newTask = () => {
         if (numberOfLists.length < 4) {
             const newNumberOfList = [...numberOfLists];
-            newNumberOfList.push("List")
-            setNumberOfLists(newNumberOfList)
+            newNumberOfList.push("List");
+            setNumberOfLists(newNumberOfList);
         } else {
             alert("Too many list of tasks")
         }
@@ -55,10 +55,14 @@ const Form = () => {
         console.log("Tasks saved");
     }
 
-    const deleteTask = () => {
-        const newNumberOfList = [...numberOfLists];
+    saveTask();
+
+    const deleteTask = (e) => {
+        console.log("event: ");
+        console.log(document.getElementById('select').value);
+        /*const newNumberOfList = [...numberOfLists];
         newNumberOfList.pop();
-        setNumberOfLists(newNumberOfList);
+        setNumberOfLists(newNumberOfList);*/
     }
     
     const styleForm = {
@@ -70,16 +74,16 @@ const Form = () => {
                                                             "1fr 1fr 1fr 1fr"
         },
         form1: {
-            visibility: numberOfLists.length === 0 && "hidden",
+            display: numberOfLists.length === 0 && "none",
         },
         form2: {
-            visibility: numberOfLists.length <= 1 && "hidden",
+            display: numberOfLists.length <= 1 && "none",
         },
         form3: {
-            visibility: numberOfLists.length <=2 && "hidden",
+            display: numberOfLists.length <=2 && "none",
         },
         form4: {
-            visibility: numberOfLists.length <=3 && "hidden",
+            display: numberOfLists.length <=3 && "none",
         },
         
     }
@@ -129,42 +133,50 @@ const Form = () => {
                 newEditTitle[0].editTitle4 = !newEditTitle[0].editTitle4
             }
             setEditTitle(newEditTitle)
-        } 
+        }
     }
 
+    
     return <>
         <div className="contButton">
-            <button type="button" className="newTaskButton" onClick={newTask}> New Day of tasks </button>
-            <button type="button" className="deleteTaskButton" onClick={deleteTask}> Hide last list of tasks</button>
-            <button type="button" className="saveTasksButton" onClick={saveTask}> Save uncompleted tasks</button>
+            <button type="button" className="newTaskButton mainButton" onClick={newTask}> New Day of tasks </button>
+            <div id="containerDelete">
+                <>{title[0].title1 === "Insert Title Here" ? "" : <select id="select">
+                    <>{title[0].title1 === "Insert Title Here" ? "": <option value="Lista 1">{title[0].title1}</option>}</>
+                    <>{title[0].title2 === "Insert Title Here" ? "": <option value="Lista 2">{title[0].title2}</option>}</>
+                    <>{title[0].title3 === "Insert Title Here" ? "": <option value="Lista 3">{title[0].title3}</option>}</>
+                    <>{title[0].title4 === "Insert Title Here" ? "": <option value="Lista 4">{title[0].title4}</option>}</>
+                </select>}</>
+                <button type="button" className="deleteTaskButton mainButton" onClick={deleteTask}> Hide list of task</button>
+            </div>
         </div>
         <div className="container" style={styleForm.container}>
             <form className="formList" onSubmit={onSubmit} style={styleForm.form1}>
             <h3>{editTitle[0].editTitle1 ? 
                     <input id="input1" className="input" value={title[0].title1} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
-                    <p id="input1" onDoubleClick={changeEditTitle}>{title[0].title1 ? title[0].title1 : "No title"}</p>}
-                <Task item={item1} setItem={setItem1}/></h3>
+                    <p id="input1" onDoubleClick={changeEditTitle}>{title[0].title1 ? title[0].title1 : "No title"}</p>}</h3>
+                <Task item={item1} setItem={setItem1}/>
             </form>
 
             <form className="formList" onSubmit={onSubmit} style={styleForm.form2}>
             <h3>{editTitle[0].editTitle2 ? 
                     <input id="input2" className="input" value={title[0].title2} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
-                    <p id="input2" onDoubleClick={changeEditTitle}>{title[0].title2 ? title[0].title2 : "No title"}</p>}
-                <Task item={item2} setItem={setItem2}/></h3>
+                    <p id="input2" onDoubleClick={changeEditTitle}>{title[0].title2 ? title[0].title2 : "No title"}</p>}</h3>
+                <Task item={item2} setItem={setItem2}/>
             </form>
 
             <form className="formList" onSubmit={onSubmit} style={styleForm.form3}>
             <h3>{editTitle[0].editTitle3 ? 
                     <input id="input3" className="input" value={title[0].title3} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
-                    <p id="input3" onDoubleClick={changeEditTitle}>{title[0].title3 ? title[0].title3 : "No title"}</p>}
-                <Task item={item3} setItem={setItem3}/></h3>
+                    <p id="input3" onDoubleClick={changeEditTitle}>{title[0].title3 ? title[0].title3 : "No title"}</p>}</h3>
+                <Task item={item3} setItem={setItem3}/>
             </form>
 
             <form className="formList" onSubmit={onSubmit} style={styleForm.form4}>
             <h3>{editTitle[0].editTitle4 ? 
                     <input id="input4" className="input" value={title[0].title4} onChange={changeTitle} onDoubleClick={changeEditTitle} onKeyDown={handleKeyDown}/> : 
-                    <p id="input4" onDoubleClick={changeEditTitle}>{title[0].title4 ? title[0].title4 : "No title"}</p>}
-                <Task item={item4} setItem={setItem4}/></h3>
+                    <p id="input4" onDoubleClick={changeEditTitle}>{title[0].title4 ? title[0].title4 : "No title"}</p>}</h3>
+                <Task item={item4} setItem={setItem4}/>
             </form>
             {/*tasks*/}
         </div>
