@@ -2,6 +2,7 @@
     border: 1px solid black;
     display: flex;
     margin-left: 5%;
+    margin-right: 5%;
     padding: 1%;
 }
 
@@ -25,6 +26,10 @@ table {
     width: 100%;
 }
 
+select {
+    font-size: 2vw;
+}
+
 .container {
     display: grid;
     height: 100vh;
@@ -33,7 +38,9 @@ table {
 .contButton {
     display: grid;
     grid-template-columns: 50% 50%;
-    padding-bottom: 15px;
+    padding-bottom: 1%;
+    border: 1px dashed brown;
+    padding-top: 1%;
 }
 
 .input {
@@ -43,8 +50,9 @@ table {
 }
 
 .mainButton {
-    margin: auto 5% auto 5%;
+    margin: auto 3% auto 3%;
     width: 90%;
+    font-size: 2vw;
 }
 
 h3 {

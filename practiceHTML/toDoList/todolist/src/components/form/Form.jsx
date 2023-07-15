@@ -58,11 +58,78 @@ const Form = () => {
     saveTask();
 
     const deleteTask = (e) => {
-        console.log("event: ");
         console.log(document.getElementById('select').value);
-        /*const newNumberOfList = [...numberOfLists];
+        if (document.getElementById('select').value === "List1") {
+            // Title Changer :
+            setTitle(
+                [{
+                    title1: JSON.parse(localStorage.getItem("titles"))[0]["title2"],
+                    title2: JSON.parse(localStorage.getItem("titles"))[0]["title3"],
+                    title3: JSON.parse(localStorage.getItem("titles"))[0]["title4"],
+                    title4: "Insert Title Here"
+                }]
+            )
+            // Items changer :
+            setItem1(!!JSON.parse(localStorage.getItem("List2")) ? 
+                        JSON.parse(localStorage.getItem("List2")) : 
+                        []);
+            setItem2(!!JSON.parse(localStorage.getItem("List3")) ? 
+                        JSON.parse(localStorage.getItem("List3")) : 
+                        []);
+            setItem3(!!JSON.parse(localStorage.getItem("List4")) ? 
+                        JSON.parse(localStorage.getItem("List4")) : 
+                        []);
+            setItem4([]);
+        } else if (document.getElementById('select').value === "List2") {
+            // Title Changer :
+            setTitle(
+                [{
+                    title1: JSON.parse(localStorage.getItem("titles"))[0]["title1"],
+                    title2: JSON.parse(localStorage.getItem("titles"))[0]["title3"],
+                    title3: JSON.parse(localStorage.getItem("titles"))[0]["title4"],
+                    title4: "Insert Title Here"
+                }]
+            )
+            // Items changer :
+            setItem2(!!JSON.parse(localStorage.getItem("List3")) ? 
+                        JSON.parse(localStorage.getItem("List3")) : 
+                        []);
+            setItem3(!!JSON.parse(localStorage.getItem("List4")) ? 
+                        JSON.parse(localStorage.getItem("List4")) : 
+                        []);
+            setItem4([]);
+        } else if (document.getElementById('select').value === "List3") {
+            // Title Changer :
+            setTitle(
+                [{
+                    title1: JSON.parse(localStorage.getItem("titles"))[0]["title1"],
+                    title2: JSON.parse(localStorage.getItem("titles"))[0]["title2"],
+                    title3: JSON.parse(localStorage.getItem("titles"))[0]["title4"],
+                    title4: "Insert Title Here"
+                }]
+            )
+            // Items changer :
+            setItem3(!!JSON.parse(localStorage.getItem("List4")) ? 
+                        JSON.parse(localStorage.getItem("List4")) : 
+                        []);
+            setItem4([]);
+        } else if (document.getElementById('select').value === "List4") {
+            // Title Changer :
+            setTitle(
+                [{
+                    title1: JSON.parse(localStorage.getItem("titles"))[0]["title1"],
+                    title2: JSON.parse(localStorage.getItem("titles"))[0]["title2"],
+                    title3: JSON.parse(localStorage.getItem("titles"))[0]["title3"],
+                    title4: "Insert Title Here"
+                }]
+            )
+            // Items changer :
+            setItem4([]);
+        } 
+
+        const newNumberOfList = [...numberOfLists];
         newNumberOfList.pop();
-        setNumberOfLists(newNumberOfList);*/
+        setNumberOfLists(newNumberOfList);
     }
     
     const styleForm = {
@@ -85,7 +152,12 @@ const Form = () => {
         form4: {
             display: numberOfLists.length <=3 && "none",
         },
-        
+        mainButton: {
+            width: numberOfLists.length === 0 && "94%"
+        },
+        contButton: {
+            gridTemplateColumns: numberOfLists.length === 0 && "1fr",
+        }
     }
 
     const onSubmit = (e) => {
@@ -102,7 +174,7 @@ const Form = () => {
             newTitle[0].title3 = event.target.value
         } else if (event.target.id === "input4"){
             newTitle[0].title4 = event.target.value
-        } 
+        }
         setTitle(newTitle)
     }
 
@@ -121,7 +193,7 @@ const Form = () => {
     }
 
     const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" || e.key === "Tab") {
             const newEditTitle = [...editTitle];
             if (e.target.id === "input1"){
                 newEditTitle[0].editTitle1 = !newEditTitle[0].editTitle1
@@ -138,17 +210,17 @@ const Form = () => {
 
     
     return <>
-        <div className="contButton">
-            <button type="button" className="newTaskButton mainButton" onClick={newTask}> New Day of tasks </button>
-            <div id="containerDelete">
+        <div className="contButton" style={styleForm.contButton}>
+            <button type="button" className="newTaskButton mainButton" onClick={newTask} style={styleForm.mainButton}> New Day of tasks </button>
+            <>{ numberOfLists.length === 0 ? <></> :   <div id="containerDelete">
                 <>{title[0].title1 === "Insert Title Here" ? "" : <select id="select">
-                    <>{title[0].title1 === "Insert Title Here" ? "": <option value="Lista 1">{title[0].title1}</option>}</>
-                    <>{title[0].title2 === "Insert Title Here" ? "": <option value="Lista 2">{title[0].title2}</option>}</>
-                    <>{title[0].title3 === "Insert Title Here" ? "": <option value="Lista 3">{title[0].title3}</option>}</>
-                    <>{title[0].title4 === "Insert Title Here" ? "": <option value="Lista 4">{title[0].title4}</option>}</>
+                    <>{title[0].title1 === "Insert Title Here" ? "": <option value="List1">{title[0].title1}</option>}</>
+                    <>{title[0].title2 === "Insert Title Here" ? "": <option value="List2">{title[0].title2}</option>}</>
+                    <>{title[0].title3 === "Insert Title Here" ? "": <option value="List3">{title[0].title3}</option>}</>
+                    <>{title[0].title4 === "Insert Title Here" ? "": <option value="List4">{title[0].title4}</option>}</>
                 </select>}</>
-                <button type="button" className="deleteTaskButton mainButton" onClick={deleteTask}> Hide list of task</button>
-            </div>
+                <button type="button" className="deleteTaskButton mainButton" onClick={deleteTask}> Delete list of task</button>
+            </div>}</>
         </div>
         <div className="container" style={styleForm.container}>
             <form className="formList" onSubmit={onSubmit} style={styleForm.form1}>
