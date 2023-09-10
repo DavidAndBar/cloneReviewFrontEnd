@@ -1,5 +1,5 @@
 
-import Form from "./components/form/Form.jsx"
+import Form from "./components/private/form/Form.jsx"
 
 
 const App = () => {
