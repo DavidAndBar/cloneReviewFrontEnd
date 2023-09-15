@@ -1,7 +1,11 @@
 const SignUp = () => {
+    const submitForm = (e) => {
+        e.preventDefault();
+    }
+
     return <>
         <h1> This is the view from Sign Up </h1>
-        <form>
+        <form onSubmit={submitForm}>
             <label htmlFor="name"> Name: </label><br/>
             <input htmlFor="name" id="name" name="name" type="text" required/><br/>
             <label htmlFor="email"> Email: </label><br/>

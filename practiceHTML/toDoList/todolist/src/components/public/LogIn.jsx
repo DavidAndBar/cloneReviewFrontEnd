@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 
+
 const LogIn = ({isAuth, setIsAuth}) => {
+
     
+
+
     const loginfn = () => {
         setIsAuth(true);
     }
 
     const submitForm = (e) => {
         e.preventDefault();
+
     }
 
     return <>
