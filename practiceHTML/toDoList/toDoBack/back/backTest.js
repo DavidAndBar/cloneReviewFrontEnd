@@ -1,29 +1,14 @@
+const express = require('express');
+const Users = require('../models/users')
+const router = express.Router();
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+router.get('/', (req, res) => {
+    res.send("Hello world from backTest");
+})
 
-const username = "DavidAndBar";
-const password = "4FP57aBNBcq0qISH"
-const uri = `mongodb+srv://${username}:${password}@cluster.hjyp6wt.mongodb.net/?retryWrites=true&w=majority`;
+router.get('/getall', async (req, res) => {
+    const docs_users = await Users.find();
+    res.send(docs_users) 
+})
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-        serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-        }
-    });
-
-    async function run() {
-        try {
-            // Connect the client to the server	(optional starting in v4.7)
-            await client.connect();
-            // Send a ping to confirm a successful connection
-            await client.db("admin").command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");
-        } finally {
-            // Ensures that the client will close when you finish/error
-            await client.close();
-        }
-        }
-        run().catch(console.dir);
+module.exports = router;
