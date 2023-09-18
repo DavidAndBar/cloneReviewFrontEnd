@@ -6,8 +6,9 @@ const databaseName = process.env.databaseName;
 const uri = `mongodb+srv://${username}:${password}@cluster.hjyp6wt.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 
 
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}) // useNew... and useUni... are optional parameters, 
+                                                                        // connection still works without them
 .then( () => {
     console.log("DB connected")
 } )
-.catch( () => console.log("Error"));
+.catch( (error) => console.log("Error"));

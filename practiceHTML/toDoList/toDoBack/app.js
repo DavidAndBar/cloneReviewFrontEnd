@@ -21,7 +21,8 @@ var corsOptions = {
 // Define port
 const port = process.env.port;
 
-// Define the url used with a router inside backtest file.
+// Define the url used with a router inside backtest file. - These are middlewares.
+app.use(express.json())
 app.use('/api', cors(corsOptions), backtest);
 
 // Executes the back
