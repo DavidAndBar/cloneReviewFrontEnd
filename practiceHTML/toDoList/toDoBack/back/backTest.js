@@ -1,7 +1,7 @@
 // This file is the manipulator of routes.
 
 const express = require('express');
-const Users = require('../models/users')
+const Users = require('../models/users');
 const router = express.Router();
 
 // Get all the users saved
@@ -32,6 +32,26 @@ router.get('/getone/:id', (req, res) => {
         res.json({message: error})
     }*/
     
+})
+
+router.put('/getone/update/:id', (req, res) => {
+    const userId = req.params.id;
+    const user = req.body; // We can send a body with a JSON only specifying the parameters we want to update and it will still work. 
+
+    Users.updateOne(
+        {_id: userId}, { $set: user}
+    )
+    .then(result => res.json(result))
+    .catch(error => res.json({message: error}))
+
+})
+
+router.delete('/getone/delete/:id', (req, res) => { 
+    const userId = req.params.id;
+    
+    Users.deleteOne( {_id: userId} ) //You can also use .rb emove
+    .then(result => res.json(result))
+    .catch(error => res.json({message: error}))
 })
 
 
