@@ -39,12 +39,12 @@ router.post('/login', async (req, res) => {
                     const token = jwt.sign({
                             name: result.name,
                             id: result._id
-                        }, process.env.SECRET_TOKEN, {expiresIn : "1 year"});
+                        }, process.env.SECRET_TOKEN, {expiresIn : "10 year"});
                     
                     res.header('auth-token', token)
                     .json({"message": comp});
                 } else {
-                    res.json(comp)
+                    res.json({"message": comp})
                 }
             })
             .catch(error => res.json({message: error}))

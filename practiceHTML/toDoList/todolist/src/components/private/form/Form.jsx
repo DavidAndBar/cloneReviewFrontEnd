@@ -25,7 +25,7 @@ const Form = () => {
         editTitle1: false,
         editTitle2: false,
         editTitle3: false,
-        editTitle4: false,
+        editTitle4: false
     }]);
 
     const [title, setTitle] = useState(!!JSON.parse(localStorage.getItem("titles")) ?
@@ -47,6 +47,7 @@ const Form = () => {
         }
     }
 
+
     const saveTask = () => {
         localStorage.setItem("titles", JSON.stringify(title))
         localStorage.setItem("numberOfLists", JSON.stringify(numberOfLists,"List"))
@@ -60,7 +61,6 @@ const Form = () => {
     saveTask();
 
     const deleteTask = (e) => {
-        console.log(document.getElementById('select').value);
         if (document.getElementById('select').value === "List1") {
             // Title Changer :
             setTitle(

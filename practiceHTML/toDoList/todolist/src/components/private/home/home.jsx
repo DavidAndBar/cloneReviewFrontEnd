@@ -1,10 +1,11 @@
 import Form from '../form/Form.jsx'
 
 
-const Home = ({isAuth, setIsAuth}) => {
+const Home = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
 
 const logout = () => {
-    setIsAuth(false)
+    setIsAuth(false);
+    setSecurityToken("");
 }
 
 return <>
