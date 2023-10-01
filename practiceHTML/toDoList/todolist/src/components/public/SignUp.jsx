@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styleLoading.css";
 
 const SignUp = () => {
 
@@ -6,13 +7,17 @@ const SignUp = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+        document.getElementById("signUpButton1").disabled = true;
+        document.getElementById("hiddenLoader").className = "loader";
+        document.getElementById("hiddenLoaderBar").className = "loaderBar";
+        
         if (e.target.password.value === e.target.confirmpassword.value) {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
             var raw = JSON.stringify({
-            "name": e.target.name.value,
-            "email": e.target.email.value,
+            "name": e.target.name.value.toLowerCase(),
+            "email": e.target.email.value.toLowerCase(),
             "password": e.target.password.value
             });
 
@@ -23,11 +28,19 @@ const SignUp = () => {
             redirect: 'follow'
             };
 
-            fetch("https://todolistbackend-db.azurewebsites.net/auth/register", requestOptions)
-            .then(response => response.text())
+            fetch("http://localhost:8080/auth/register", requestOptions) //https://todolistbackend-db.azurewebsites.net/auth/register", requestOptions)
+            .then(response => response.json())
             .then(result => {
-                alert("User Created!"); // Let the user know that their user were created.
-                window.location.href = '../';}) //Once I get the result I need to redirect the user to the index page.
+                if (result.message) {
+                    alert("User Created!"); // Let the user know that their user were created.
+                    window.location.href = '../'; //Once I get the result I need to redirect the user to the index page.
+                } else {
+                    alert("Email already exists. Please enter a new email!");
+                    document.getElementById("signUpButton1").disabled = false;
+                    document.getElementById("hiddenLoader").className = "hiddenLoader";
+                    document.getElementById("hiddenLoaderBar").className = "hiddenLoaderBar";
+                }                
+            })
             .catch(error => console.log('error', error));
         } else {
             setMatchPasswords(false)
@@ -47,8 +60,9 @@ const SignUp = () => {
             <input htmlFor="confirmpassword" id="confirmpassword" name="confirmpassword" type="password" required minLength={6}/><br/>
             <> {matchPasswords ? <></> : <p className="password-mismatch"> Passwords Must Match! </p> } </>
             <div>
-                <button type="submit" style={{width: "45%"}}> Create Account </button>
-                <button type="button" style={{width: "45%"}} onClick={() => window.location.href = '../'}> Back </button>
+                <div id="hiddenLoader" className="hiddenLoader"><div id="hiddenLoaderBar" className="hiddenLoaderBar"></div></div>
+                <button id="signUpButton1" type="submit" style={{width: "45%"}}> Create Account </button>
+                <button id="signUpButton2" type="button" style={{width: "45%"}} onClick={() => window.location.href = '../'}> Back </button>
             </div>
         </form>
     </>

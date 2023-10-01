@@ -17,10 +17,10 @@ router.post('/register', (req, res) => {
             };
             const user = new Users(body);
             user.save()
-            .then(user => res.json(user))
+            .then(user => res.json({message: true}))
             .catch(error => res.json(error));
         } else {
-            res.json({message: "User Already Exists"});
+            res.json({message: false});
         }
     })
     .catch(error => res.json("Error Find: ", error));
@@ -47,9 +47,9 @@ router.post('/login', async (req, res) => {
                     res.json({"message": comp})
                 }
             })
-            .catch(error => res.json({message: error}))
+            .catch(error => res.json({"message": error}))
         } else {
-            res.json({"message": "User Doesn't Exist!"})
+            res.json({"message": false})
         }
     })
     .catch(error => res.json({message: error}));

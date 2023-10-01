@@ -11,7 +11,7 @@ const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-        "email": e.target.email.value,
+        "email": e.target.email.value.toLowerCase(),
         "password": e.target.password.value
         });
 
@@ -22,10 +22,11 @@ const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
         redirect: 'follow'
         };
 
-        fetch("https://todolistbackend-db.azurewebsites.net/auth/login", requestOptions)
+        fetch("http://localhost:8080/auth/login", requestOptions) //fetch("https://todolistbackend-db.azurewebsites.net/auth/login", requestOptions)
         .then(response => {
             response.json()
             .then(result => {
+                console.log(result);
                 if (result.message) { 
                     setCheckCredentials(false);
                     setIsAuth(result.message);
@@ -49,7 +50,7 @@ const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
         <label htmlFor="password"> Password </label><br/>
         <input htmlFor="password" id="password" name="password" type="password" required/><br/>
         { checkCredentials && <> Wrong email or password! </> }
-        <button type="submit" > Log In </button>
+        <button type="submit"> Log In </button>
         <p>Don't have an account? <Link to="/signUp">Join free today</Link></p>
     </form>
     </>
